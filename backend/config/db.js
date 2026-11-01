@@ -1,6 +1,4 @@
 const mysql = require('mysql2');
-const fs = require('fs');
-const path = require('path');
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -9,11 +7,11 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: 1, // CRITICAL: Only 1 connection per Vercel instance
   queueLimit: 0,
+  connectTimeout: 10000, // Fail fast if connection takes > 10 seconds
   ssl: {
-    ca: fs.readFileSync(path.join(__dirname, '..', 'ca.pem')), // Reads the downloaded certificate
-    rejectUnauthorized: true // Now we can safely verify the certificate
+    rejectUnauthorized: false
   }
 });
 
