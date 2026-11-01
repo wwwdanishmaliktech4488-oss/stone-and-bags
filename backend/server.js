@@ -6,13 +6,11 @@ require('dotenv').config();
 const app = express();
 
 // ---------- Middleware ----------
-// Allow all origins to connect (fixes CORS for Vercel)
 app.use(cors({
-  origin: '*', 
+  origin: '*', // Allow all origins so your Vercel frontend can connect
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -45,7 +43,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong', error: err.message });
 });
 
-// ---------- Start server (for local dev) ----------
+// ---------- Start server (Local Development Only) ----------
 const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
@@ -53,5 +51,5 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// Export for Vercel
+// Export the app for Vercel
 module.exports = app;
