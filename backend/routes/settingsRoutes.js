@@ -14,8 +14,14 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: { folder: 'alnajwah_settings', allowed_formats: ['jpg', 'png', 'jpeg', 'webp'] },
+  params: {
+    folder: 'alnajwah_settings',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
+    // This next line is crucial for some Vercel deployments
+    resource_type: 'auto'
+  },
 });
+
 const upload = multer({ storage });
 
 router.get('/', getSettings);
