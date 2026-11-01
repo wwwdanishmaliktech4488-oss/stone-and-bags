@@ -14,7 +14,9 @@ export default function Navbar() {
 
   useEffect(() => {
     API.get('/settings').then(res => {
-      if (res.data.site_logo) setLogo(`https://stone-and-bags.vercel.app${res.data.site_logo}`);
+      if (res.data.site_logo) {
+        setLogo(res.data.site_logo.startsWith('http') ? res.data.site_logo : `https://stone-and-bags.vercel.app${res.data.site_logo}`);
+      }
     }).catch(err => console.error(err));
 
     const updateCartCount = () => {

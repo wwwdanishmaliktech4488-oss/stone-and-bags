@@ -59,12 +59,12 @@ export default function Home() {
       <Marquee />
       <Navbar />
       
-      {/* Hero Slider - FIXED IMAGES */}
+      {/* Hero Slider */}
       <div className="relative w-full h-[400px] md:h-[600px] bg-[#050505] overflow-hidden">
         {heroSlides.map((slide, index) => (
           <div key={slide.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
-            <img src={`https://stone-and-bags.vercel.app${slide.desktop_image}`} className="hidden md:block w-full h-full object-cover" alt="Hero" />
-            <img src={`https://stone-and-bags.vercel.app${slide.mobile_image}`} className="block md:hidden w-full h-full object-cover" alt="Hero Mobile" />
+            <img src={slide.desktop_image?.startsWith('http') ? slide.desktop_image : `https://stone-and-bags.vercel.app${slide.desktop_image}`} className="hidden md:block w-full h-full object-cover" alt="Hero" />
+            <img src={slide.mobile_image?.startsWith('http') ? slide.mobile_image : `https://stone-and-bags.vercel.app${slide.mobile_image}`} className="block md:hidden w-full h-full object-cover" alt="Hero Mobile" />
           </div>
         ))}
       </div>
@@ -102,7 +102,7 @@ export default function Home() {
                   )}
 
                   <Link to={`/product/${product.id}`} className="w-full aspect-[4/3] bg-[#050505] overflow-hidden block">
-                    <img src={`https://stone-and-bags.vercel.app${product.image_url}`} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={product.image_url?.startsWith('http') ? product.image_url : `https://stone-and-bags.vercel.app${product.image_url}`} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </Link>
                   
                   <div className="p-3 flex flex-col justify-between flex-grow bg-[#111111]">

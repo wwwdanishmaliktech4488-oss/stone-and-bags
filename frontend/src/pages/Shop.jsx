@@ -70,7 +70,7 @@ export default function Shop() {
 
                   <Link to={`/product/${product.id}`} className="w-full aspect-[4/3] bg-[#050505] overflow-hidden block">
                     <img 
-                      src={`https://stone-and-bags.vercel.app${product.image_url}`} 
+                      src={product.image_url?.startsWith('http') ? product.image_url : `https://stone-and-bags.vercel.app${product.image_url}`} 
                       alt={product.name} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
