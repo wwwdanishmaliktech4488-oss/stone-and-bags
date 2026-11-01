@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  // We point this to your live Vercel backend URL
+  // Your live Vercel backend URL + /api
   baseURL: 'https://stone-and-bags.vercel.app/api', 
 });
 

@@ -6,7 +6,13 @@ require('dotenv').config();
 const app = express();
 
 // ---------- Middleware ----------
-app.use(cors());
+// Allow all origins to connect (fixes CORS for Vercel)
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,10 +24,10 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
-app.use('/api/settings', require('./routes/settingsRoutes'));
-app.use('/api/hero', require('./routes/heroRoutes')); 
+app.use('/api/hero', require('./routes/heroRoutes'));
 app.use('/api/pages', require('./routes/pageRoutes'));
-app.use('/api/reviews', require('./routes/reviewRoutes')); 
+app.use('/api/reviews', require('./routes/reviewRoutes'));
+app.use('/api/settings', require('./routes/settingsRoutes'));
 
 // ---------- Health check ----------
 app.get('/', (req, res) => {
@@ -39,9 +45,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong', error: err.message });
 });
 
-// ---------- Start server ----------
+// ---------- Start server (for local dev) ----------
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel
 module.exports = app;
