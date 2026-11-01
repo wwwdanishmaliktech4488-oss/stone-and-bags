@@ -1,16 +1,19 @@
 const mysql = require('mysql2');
+const fs = require('fs');
+const path = require('path');
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'mysql-7d4b74a-dazoratech-08a6.a.aivencloud.com',
-  user: process.env.DB_USER || 'avnadmin',
-  password: process.env.DB_PASSWORD, // Must come from Vercel env vars
-  database: process.env.DB_NAME || 'defaultdb',
-  port: process.env.DB_PORT || 14020,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
   ssl: {
-    rejectUnauthorized: false // Required for Aiven cloud database
+    ca: fs.readFileSync(path.join(__dirname, '..', 'ca.pem')), // Reads the downloaded certificate
+    rejectUnauthorized: true // Now we can safely verify the certificate
   }
 });
 
