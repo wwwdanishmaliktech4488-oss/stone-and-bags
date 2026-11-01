@@ -16,15 +16,15 @@ const getSettings = async (req, res) => {
 const updateSettings = async (req, res) => {
   try {
     if (req.files && req.files['site_logo']) {
-      const logoPath = `/uploads/${req.files['site_logo'][0].filename}`;
+      // Cloudinary returns the full URL in .path
+      const logoPath = req.files['site_logo'][0].path; 
       await db.query('UPDATE settings SET setting_value = ? WHERE setting_key = "site_logo"', [logoPath]);
     }
 
     const textSettings = [
       'contact_email', 'contact_phone', 'contact_address', 
       'social_facebook', 'social_instagram', 'social_twitter', 'social_tiktok',
-      'whatsapp_number',
-      'marquee_text', 'marquee_color' // <-- ADDED HERE
+      'whatsapp_number', 'marquee_text', 'marquee_color'
     ];
     
     for (const key of textSettings) {

@@ -22,7 +22,8 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const { name, description, price, discount_price, category, stock } = req.body;
-    const image_url = req.file ? `/uploads/${req.file.filename}` : null;
+    // Cloudinary returns the full URL in req.file.path
+    const image_url = req.file ? req.file.path : null;
 
     await db.query(
       'INSERT INTO products (name, description, price, discount_price, category, stock, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -45,7 +46,7 @@ const updateProduct = async (req, res) => {
     if (existing.length === 0) return res.status(404).json({ message: 'Product not found' });
 
     let image_url = existing[0].image_url;
-    if (req.file) image_url = `/uploads/${req.file.filename}`;
+    if (req.file) image_url = req.file.path; // Cloudinary returns the full URL here
 
     await db.query(
       'UPDATE products SET name=?, description=?, price=?, discount_price=?, category=?, stock=?, image_url=?, is_active=? WHERE id=?',
