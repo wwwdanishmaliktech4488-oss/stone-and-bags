@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  // We point this to your live Vercel backend URL
+  baseURL: 'https://stone-and-bags.vercel.app/api', 
 });
 
 // Automatically attach the JWT token to every request if it exists
