@@ -10,20 +10,19 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  ssl: {
+    rejectUnauthorized: false // <-- CRITICAL FOR AIVEN CLOUD DATABASE
+  }
 });
 
 const promisePool = pool.promise();
 
-// Test the connection on startup with a real error message
 pool.getConnection((err, connection) => {
   if (err) {
-    console.error('❌ MySQL connection failed:');
-    console.error('   code:    ', err.code);
-    console.error('   errno:   ', err.errno);
-    console.error('   message: ', err.message);
+    console.error('❌ MySQL connection failed:', err.message);
     return;
   }
-  console.log('✅ MySQL connected successfully');
+  console.log('✅ Cloud MySQL connected successfully');
   connection.release();
 });
 
