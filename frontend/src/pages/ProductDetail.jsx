@@ -70,7 +70,11 @@ export default function ProductDetail() {
           )}
 
           <div className="w-full md:w-1/2 bg-[#050505] flex items-center justify-center p-6 md:p-12">
-            <img src={`http://localhost:5000${product.image_url}`} alt={product.name} className="w-full h-auto max-h-[400px] md:max-h-[600px] object-contain drop-shadow-2xl" />
+            <img 
+              src={`https://stone-and-bags.vercel.app${product.image_url}`} 
+              alt={product.name} 
+              className="w-full h-auto max-h-[400px] md:max-h-[600px] object-contain drop-shadow-2xl" 
+            />
           </div>
 
           <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center">

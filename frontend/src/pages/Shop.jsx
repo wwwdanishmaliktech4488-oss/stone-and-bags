@@ -57,7 +57,6 @@ export default function Shop() {
               return (
                 <div key={product.id} className="group bg-[#111111] rounded-xl border border-[#D4AF37]/20 overflow-hidden hover:border-[#D4AF37]/60 hover:shadow-2xl transition-all duration-300 flex flex-col relative">
                   
-                  {/* FIXED BADGES - Gold for discount, Red for Sale */}
                   {hasDiscount && (
                     <div className="absolute top-2 left-2 right-2 flex justify-between z-10">
                       <span className="bg-[#D4AF37] text-black text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
@@ -69,16 +68,14 @@ export default function Shop() {
                     </div>
                   )}
 
-                  {/* SMALLER IMAGE BOX */}
                   <Link to={`/product/${product.id}`} className="w-full aspect-[4/3] bg-[#050505] overflow-hidden block">
                     <img 
-                      src={`http://localhost:5000${product.image_url}`} 
+                      src={`https://stone-and-bags.vercel.app${product.image_url}`} 
                       alt={product.name} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
                   </Link>
                   
-                  {/* DETAILS */}
                   <div className="p-3 flex flex-col justify-between flex-grow bg-[#111111]">
                     <div>
                       <p className="text-[#D4AF37] text-[8px] font-bold tracking-wider uppercase mb-1">{product.category}</p>

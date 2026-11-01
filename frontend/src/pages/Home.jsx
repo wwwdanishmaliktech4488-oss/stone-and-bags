@@ -59,12 +59,12 @@ export default function Home() {
       <Marquee />
       <Navbar />
       
-      {/* Hero Slider */}
+      {/* Hero Slider - FIXED IMAGES */}
       <div className="relative w-full h-[400px] md:h-[600px] bg-[#050505] overflow-hidden">
         {heroSlides.map((slide, index) => (
           <div key={slide.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
-            <img src={`http://localhost:5000${slide.desktop_image}`} className="hidden md:block w-full h-full object-cover" alt="Hero" />
-            <img src={`http://localhost:5000${slide.mobile_image}`} className="block md:hidden w-full h-full object-cover" alt="Hero Mobile" />
+            <img src={`https://stone-and-bags.vercel.app${slide.desktop_image}`} className="hidden md:block w-full h-full object-cover" alt="Hero" />
+            <img src={`https://stone-and-bags.vercel.app${slide.mobile_image}`} className="block md:hidden w-full h-full object-cover" alt="Hero Mobile" />
           </div>
         ))}
       </div>
@@ -94,7 +94,6 @@ export default function Home() {
               return (
                 <div key={product.id} className="group bg-[#111111] rounded-xl border border-[#D4AF37]/20 overflow-hidden hover:border-[#D4AF37]/60 hover:shadow-2xl transition-all duration-300 flex flex-col relative">
                   
-                  {/* FIXED BADGES - Gold for discount, Red for Sale */}
                   {hasDiscount && (
                     <div className="absolute top-2 left-2 right-2 flex justify-between z-10">
                       <span className="bg-[#D4AF37] text-black text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">★ -{discountPercent}%</span>
@@ -103,7 +102,7 @@ export default function Home() {
                   )}
 
                   <Link to={`/product/${product.id}`} className="w-full aspect-[4/3] bg-[#050505] overflow-hidden block">
-                    <img src={`http://localhost:5000${product.image_url}`} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={`https://stone-and-bags.vercel.app${product.image_url}`} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </Link>
                   
                   <div className="p-3 flex flex-col justify-between flex-grow bg-[#111111]">

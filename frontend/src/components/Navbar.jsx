@@ -14,7 +14,7 @@ export default function Navbar() {
 
   useEffect(() => {
     API.get('/settings').then(res => {
-      if (res.data.site_logo) setLogo(`http://localhost:5000${res.data.site_logo}`);
+      if (res.data.site_logo) setLogo(`https://stone-and-bags.vercel.app${res.data.site_logo}`);
     }).catch(err => console.error(err));
 
     const updateCartCount = () => {
@@ -41,7 +41,6 @@ export default function Navbar() {
     }
   };
 
-  // ADMIN BUTTON REMOVED FROM HERE
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
@@ -54,12 +53,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 md:h-24 items-center">
           
-          {/* LOGO */}
           <Link to="/" className="flex items-center">
             <img src={logo} alt="AL NAJWAH" className="h-16 md:h-20 w-auto object-contain" onError={(e) => { e.target.src = '/logo.png'; }} />
           </Link>
           
-          {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link key={link.name} to={link.path} className={`font-medium tracking-widest uppercase text-xs transition-colors ${location.pathname === link.path ? 'text-[#D4AF37]' : 'text-gray-400 hover:text-[#D4AF37]'}`}>
@@ -67,14 +64,12 @@ export default function Navbar() {
               </Link>
             ))}
             
-            {/* Desktop Search Icon */}
             <button onClick={() => setIsSearchOpen(!isSearchOpen)} className="text-gray-400 hover:text-[#D4AF37] transition-colors p-2">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
 
-            {/* Desktop Cart */}
             <Link to="/cart" className="relative p-2 text-gray-400 hover:text-[#D4AF37] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -87,7 +82,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Right Side */}
           <div className="flex items-center gap-2 md:hidden">
             <button onClick={() => setIsSearchOpen(!isSearchOpen)} className="text-gray-400 hover:text-[#D4AF37] p-2">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,7 +111,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Search Bar Dropdown */}
       {isSearchOpen && (
         <div className="bg-[#111111] border-t border-[#D4AF37]/20 p-4 absolute w-full shadow-lg z-40">
           <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto relative flex items-center">
@@ -128,7 +121,6 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-[#111111] border-t border-[#D4AF37]/20">
           <div className="px-4 pt-2 pb-6 space-y-2">
